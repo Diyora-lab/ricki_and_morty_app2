@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
-String baseUrl = 'https://pokeapi.co/api/v2/';
+String baseUrl = 'https://rickandmortyapi.com/api/character/';
 const _duration = Duration(seconds: 30);
 
 @lazySingleton
