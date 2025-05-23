@@ -1,4 +1,7 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:ricki_and_morty_app2/modules/characters_list/domain/entity/characters_entity.dart';
 import 'package:ricki_and_morty_app2/modules/characters_list/domain/usecase/fetch_characters_list_usecase.dart';
 
@@ -12,6 +15,7 @@ enum StateStatus {
 class GetCharactersListBloc extends Bloc<GetCharactersListEvent,
     GetCharactersListState<List<CharactersEntity>>> {
   final FetchCharactersListUsecase _fetchCharactersListUsecase;
+  List<CharactersEntity> characters = [];
   GetCharactersListBloc(
       {required FetchCharactersListUsecase fetchCharactersListUsecase})
       : _fetchCharactersListUsecase = fetchCharactersListUsecase,
@@ -24,7 +28,9 @@ class GetCharactersListBloc extends Bloc<GetCharactersListEvent,
       );
       try {
         final result = await _fetchCharactersListUsecase.call();
-        emit(GetCharactersListState.success(model: result));
+        characters = [...characters, ...?result.call()];
+
+        emit(GetCharactersListState.success(model: state.model));
       } catch (e) {
         emit(const GetCharactersListState.error());
       }

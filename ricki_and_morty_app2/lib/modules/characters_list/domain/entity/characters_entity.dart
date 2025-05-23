@@ -22,4 +22,16 @@ class CharactersEntity {
     required this.episode,
     required this.url,
   });
+
+  CharactersEntity.empty()
+      : id = 0,
+        name = '',
+        status = '',
+        species = '',
+        type = '',
+        gender = '',
+        image = '',
+        location = '',
+        episode = [],
+        url = '';
 }

@@ -24,7 +24,8 @@ class CharactersModel extends CharactersEntity {
       gender: json['gender'] ?? '',
       image: json['image'] ?? 0,
       location: json['location']['name'],
-      episode: json['episode'] ?? 0,
+      episode:
+          json['episode'] != null ? List<String>.from(json['episode']) : [],
       url: json['url'] ?? 0,
     );
   }
